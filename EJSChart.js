@@ -2316,8 +2316,14 @@
 					return false;
 				};
 				if (this.caption == undefined) { this.caption = "Axis Caption"; }
-				if (this.__orientation == "h" || EJSC.__isIE || getTransformProperty(document.body) ) { return '<span>' + this.caption + '</span>'; }
-				else { return '<span>' + this.caption.split("").join("<br/>") + '</span>'; }
+				/*span tags cause the exported svg axis titles, increments, and graph title to be jumbled*/
+				//if (this.__orientation == "h" || EJSC.__isIE || getTransformProperty(document.body) ) { return '<span>' + this.caption + '</span>'; }
+
+				if (this.__orientation == "h" || EJSC.__isIE || getTransformProperty(document.body) ) { return this.caption ; }
+				
+				/*span tags cause the exported svg axis titles, increments, and graph title to be jumbled*/
+				//else { return '<span>' + this.caption.split("").join("<br/>") + '</span>'; }
+				else { return  this.caption.split("").join("<br/>") ; }
 			},
 			__canDraw: function() {
 				return ((this.visible == true && this.__series.length > 0) ||
